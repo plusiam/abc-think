@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC 생각바꾸기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #resultCard, #resultCard * { visibility: visible; }
+            #resultCard {
+                position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 1rem;
+                border: none !important; box-shadow: none !important;
+            }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 font-sans">
+
+    <div class="w-full max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 space-y-8 border-t-8 border-green-600">
+            <header class="text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">ABC 생각바꾸기</h1>
+                <p class="text-gray-500 mt-2">나의 생각을 돌아보며 마음을 건강하게 조절하는 법을 배워요.</p>
+            </header>
+
+            <form id="abcForm" class="space-y-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 bg-gray-50 p-4 rounded-lg">
+                    <div>
+                        <label for="schoolName" class="font-semibold text-gray-800">학교</label>
+                        <input type="text" id="schoolName" name="schoolName" class="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="예: 마음초등학교">
+                    </div>
+                    <div>
+                        <label for="className" class="font-semibold text-gray-800">학년/반</label>
+                        <input type="text" id="className" name="className" class="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="예: 5학년 1반">
+                    </div>
+                    <div>
+                        <label for="studentName" class="font-semibold text-gray-800">이름</label>
+                        <input type="text" id="studentName" name="studentName" class="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="예: 홍길동">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="situation" class="text-xl font-semibold text-gray-800 block mb-2">🤔 1. 어떤 상황이었나요?</label>
+                    <textarea id="situation" name="situation" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="최근 나를 힘들게 했던 상황을 구체적으로 적어보세요."></textarea>
+                </div>
+
+                <div>
+                    <label class="text-xl font-semibold text-gray-800 block mb-3">🧐 2. 그 상황은 내가 바꿀 수 있나요?</label>
+                    <div class="flex flex-col sm:flex-row gap-x-6 gap-y-3 bg-gray-50 p-4 rounded-lg">
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="control" value="바꿀 수 있는 것" class="text-green-600 focus:ring-green-500"><span>✅ 바꿀 수 있는 것 (내 말, 행동, 생각 등)</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="control" value="바꾸기 어려운 것" class="text-green-600 focus:ring-green-500"><span>⚠️ 바꾸기 어려운 것 (시험 결과, 타인의 반응 등)</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="control" value="바꿀 수 없는 것" class="text-green-600 focus:ring-green-500"><span>🚫 바꿀 수 없는 것 (과거, 날씨, 타인의 마음 등)</span></label>
+                    </div>
+                </div>
+
+                <hr>
+                <p class="text-center text-gray-600 font-medium">이제 그 상황을 ABC로 나누어 분석해볼게요!</p>
+                
+                <div>
+                    <label for="eventA" class="text-xl font-semibold text-gray-800 block mb-2">A. 일어난 사건 (Activating Event)</label>
+                    <textarea id="eventA" name="eventA" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="누가 봐도 그렇다고 할 수 있는 '객관적인 사실'만 적어보세요. (예: 시험에서 3문제를 틀렸다)"></textarea>
+                </div>
+
+                <div>
+                    <label for="beliefB" class="text-xl font-semibold text-gray-800 block mb-2">B. 나의 생각 (Belief)</label>
+                    <textarea id="beliefB" name="beliefB" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="그 사건에 대해 나도 모르게 떠오른 '자동적인 생각'을 적어보세요. (예: 나는 멍청해. 역시 난 안돼.)"></textarea>
+                </div>
+
+                <div>
+                    <label for="consequenceC" class="text-xl font-semibold text-gray-800 block mb-2">C. 결과 (Consequence)</label>
+                    <textarea id="consequenceC" name="consequenceC" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="그 생각 때문에 어떤 감정을 느꼈고, 어떻게 행동했나요? (예: 슬퍼서 포기하고 싶어졌다.)"></textarea>
+                </div>
+                
+                <hr>
+                <p class="text-center text-green-700 font-bold text-lg">✨ 이제, 생각을 바꾸어 새로운 결과를 만들어 볼 시간이에요! ✨</p>
+
+                <div>
+                    <div class="flex items-center gap-4 mb-2">
+                        <label for="beliefB_prime" class="text-xl font-semibold text-gray-800">B'. 건강한 생각 바꾸기</label>
+                        <button type="button" id="hintBtn" class="bg-yellow-300 text-yellow-800 rounded-full w-7 h-7 text-lg font-bold hover:bg-yellow-400 transition">💡</button>
+                    </div>
+                    <div id="hintBox" class="hidden p-3 mb-3 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded-r-lg"></div>
+                    <textarea id="beliefB_prime" name="beliefB_prime" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="자동적인 생각을 더 현실적이고, 나에게 도움이 되는 건강한 생각으로 바꾸어 적어보세요."></textarea>
+                </div>
+                
+                <div>
+                    <label for="consequenceC_prime" class="text-xl font-semibold text-gray-800 block mb-2">C'. 변화된 결과</label>
+                    <textarea id="consequenceC_prime" name="consequenceC_prime" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="건강한 생각을 하니 기분이나 행동이 어떻게 달라질까요? (예: 아쉽지만, 다음엔 더 잘할 수 있을 거야!)"></textarea>
+                </div>
+
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button type="button" id="submitBtn" class="w-full sm:w-2/3 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 hover:scale-105 shadow-md">
+                        ABC 생각 정리표 완성
+                    </button>
+                    <button type="button" id="resetBtn" class="w-full sm:w-1/3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition-transform duration-200 hover:scale-105 shadow-md">
+                        다시 쓰기
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="resultCard" class="hidden">
+            <div id="resultContent" class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 mt-10 border-t-8 border-green-600"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const abcForm = document.getElementById('abcForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintBox = document.getElementById('hintBox');
+            const resultCard = document.getElementById('resultCard');
+            const resultContent = document.getElementById('resultContent');
+            
+            const hints = [
+                "만약 가장 친한 친구가 똑같은 상황이라면 뭐라고 말해줄 건가요?",
+                "이 생각이 100% 사실이라고 증명할 수 있나요? 다른 가능성은 없을까요?",
+                "최악의 경우만 생각하고 있진 않나요? 일어날 수 있는 가장 좋은 경우는 무엇인가요?",
+                "1년 뒤, 5년 뒤에도 이 일이 여전히 중요하게 느껴질까요?",
+                "이 생각 말고 나를 더 기분 좋게 만드는 다른 생각은 없을까요?",
+                "모든 사람이 나처럼 생각할까요? 다르게 생각하는 사람도 있지 않을까요?"
+            ];
+
+            hintBtn.addEventListener('click', () => {
+                const randomHint = hints[Math.floor(Math.random() * hints.length)];
+                hintBox.textContent = randomHint;
+                hintBox.classList.toggle('hidden');
+            });
+
+            resetBtn.addEventListener('click', () => {
+                abcForm.reset();
+                hintBox.classList.add('hidden');
+                resultCard.classList.add('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            submitBtn.addEventListener('click', () => {
+                const formData = new FormData(abcForm);
+                const data = Object.fromEntries(formData.entries());
+
+                if (!data.schoolName || !data.className || !data.studentName || !data.situation || !data.control || !data.eventA || !data.beliefB || !data.consequenceC || !data.beliefB_prime || !data.consequenceC_prime) {
+                    alert('모든 항목을 채워주세요! 😊');
+                    return;
+                }
+                
+                resultContent.innerHTML = `
+                    <div class="text-right text-base text-gray-600 font-semibold">
+                        <p>${data.schoolName} ${data.className} ${data.studentName}</p>
+                    </div>
+                    <header class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800">ABC 생각 정리표</h2>
+                        <p class="text-gray-500 mt-2">${data.studentName} 학생의 생각을 돌아보는 시간</p>
+                    </header>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-700">🧐 분석한 상황</h3>
+                        <p class="bg-gray-100 p-3 mt-1 rounded-md">${data.situation}</p>
+                        <p class="text-sm text-green-700 font-bold mt-1">이 상황은 내가 [${data.control}] 영역에 있다고 생각해요.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div class="space-y-4 bg-red-50 p-4 rounded-lg border border-red-200">
+                            <h3 class="text-xl font-bold text-red-700 text-center">나의 자동적 사고</h3>
+                            <div>
+                                <strong class="text-red-600">A. 사건</strong>
+                                <p class="mt-1">${data.eventA}</p>
+                            </div>
+                            <div>
+                                <strong class="text-red-600">B. 생각</strong>
+                                <p class="mt-1">${data.beliefB}</p>
+                            </div>
+                            <div>
+                                <strong class="text-red-600">C. 결과</strong>
+                                <p class="mt-1">${data.consequenceC}</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 bg-green-50 p-4 rounded-lg border border-green-200">
+                            <h3 class="text-xl font-bold text-green-700 text-center">건강한 생각 바꾸기</h3>
+                             <div>
+                                <strong class="text-green-600">A. 사건</strong>
+                                <p class="mt-1">${data.eventA}</p>
+                            </div>
+                            <div>
+                                <strong class="text-green-600">B'. 바꾼 생각</strong>
+                                <p class="mt-1">${data.beliefB_prime}</p>
+                            </div>
+                            <div>
+                                <strong class="text-green-600">C'. 변화된 결과</strong>
+                                <p class="mt-1">${data.consequenceC_prime}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center no-print">
+                        <button type="button" id="printBtn" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-5 rounded-lg transition">🖨️ 인쇄 / PDF로 저장</button>
+                    </div>
+                `;
+
+                resultCard.classList.remove('hidden');
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+            });
+        });
+    </script>
+</body>
+</html>
